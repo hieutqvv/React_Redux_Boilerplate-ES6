@@ -16,6 +16,7 @@ import {
 // routes config
 import routes from '../../routes';
 import { navigation } from './AdminNavigation';
+import Authority from './Authority';
 
 const AdminAside = React.lazy(() => import('./AdminAside'));
 const AdminHeader = React.lazy(() => import('./AdminHeader'));
@@ -36,56 +37,58 @@ class AdminLayoutContainer extends Component {
   };
 
   render() {
-    return (  
-      <div className="app">
-        <AppHeader fixed>
-          <Suspense fallback={this.loading()}>
-            <AdminHeader />
-          </Suspense>
-        </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
-            <AppSidebarHeader/>
-            <AppSidebarForm/>
-            <Suspense>
-              <AppSidebarNav navConfig={{items: navigation()}} {...this.props} />
-            </Suspense>
-            <AppSidebarFooter/>
-            <AppSidebarMinimizer/>
-          </AppSidebar>
-          <main className="main">
-            <Container fluid>
-              <Suspense fallback={this.loading()}>
-                <Switch>
-                  {routes.map((route, idx) => {
-                    return route.component ? (
-                      <Route
-                        key={idx}
-                        path={route.path}
-                        exact={route.exact}
-                        name={route.name}
-                        render={props => (
-                          <route.component {...props} />
-                        )}/>
-                    ) : (null);
-                  })}
-                  <Redirect from="/" to="/dashboard"/>
-                </Switch>
-              </Suspense>
-            </Container>
-          </main>
-          <AppAside fixed>
+    return (
+      <Authority>
+        <div className="app">
+          <AppHeader fixed>
             <Suspense fallback={this.loading()}>
-              <AdminAside />
+              <AdminHeader />
             </Suspense>
-          </AppAside>
+          </AppHeader>
+          <div className="app-body">
+            <AppSidebar fixed display="lg">
+              <AppSidebarHeader/>
+              <AppSidebarForm/>
+              <Suspense>
+                <AppSidebarNav navConfig={{items: navigation()}} {...this.props} />
+              </Suspense>
+              <AppSidebarFooter/>
+              <AppSidebarMinimizer/>
+            </AppSidebar>
+            <main className="main">
+              <Container fluid>
+                <Suspense fallback={this.loading()}>
+                  <Switch>
+                    {routes.map((route, idx) => {
+                      return route.component ? (
+                        <Route
+                          key={idx}
+                          path={route.path}
+                          exact={route.exact}
+                          name={route.name}
+                          render={props => (
+                            <route.component {...props} />
+                          )}/>
+                      ) : (null);
+                    })}
+                    <Redirect from="/" to="/dashboard"/>
+                  </Switch>
+                </Suspense>
+              </Container>
+            </main>
+            <AppAside fixed>
+              <Suspense fallback={this.loading()}>
+                <AdminAside />
+              </Suspense>
+            </AppAside>
+          </div>
+          <AppFooter>
+            <Suspense fallback={this.loading()}>
+              <AdminFooter />
+            </Suspense>
+          </AppFooter>
         </div>
-        <AppFooter>
-          <Suspense fallback={this.loading()}>
-            <AdminFooter />
-          </Suspense>
-        </AppFooter>
-      </div>  
+      </Authority>
     );
   }
 }

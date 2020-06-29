@@ -7,6 +7,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {setHttpClient, setTokenOnHttpClient} from './actions';
 import rootReducers from './reducers';
 import axios from 'axios';
+import axiosMock from '../../__mocks__/authMocks'
 
 class Store extends Component {
   constructor(props) {
@@ -29,6 +30,13 @@ class Store extends Component {
     });
 
     this.store.dispatch(setHttpClient(http));
+
+    /**
+     * Mock Instance of Axios
+     *
+     * @type {AxiosInstance}
+     */
+    axiosMock.mockAuthorization(http, process.env.REACT_APP_CORE_API_ENDPOINT)
 
     this.persistor = persistStore(this.store, null, () => {
       const states = this.store.getState();
