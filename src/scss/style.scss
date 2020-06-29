@@ -1,10 +1,12 @@
-@import "~@coreui/coreui/scss/coreui.scss";
 
-@import "~@coreui/coreui/scss/_dropdown-menu-right.scss";
+// Import styles with default layout.
+@import "~@coreui/coreui/scss/coreui.scss";
 
 // Spinkit
 $spinkit-spinner-color: $body-color;
+// $spinkit-spinner-color: $body-color;
 @import '~spinkit/scss/spinkit.scss';
+$bg: url('https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1920/https://ireaco.com/wp-content/uploads/2019/03/cropped-books-business-computer-459654-1.jpg');
 
 .navbar-brand {
   margin-left: auto;
@@ -44,22 +46,6 @@ $spinkit-spinner-color: $body-color;
   }
 }
 
-.campaign-picker {
-  .selected-account {
-    display: none;
-    @media (min-width: 1200px) {
-      display: inline;
-    }
-  }
-  li {
-    margin-right: 0.25rem;
-    a {
-      padding: 0.4rem 1rem;
-      margin-top: 1px;
-    }
-  }
-}
-
 .Toastify__toast--default {
   color: #555 !important;
 }
@@ -91,61 +77,29 @@ audio.recorded-audio {
   }
 }
 
-@keyframes r1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.operation-panel {
-  padding: 1rem 1.25rem 0.25rem;
-  background-color: #f0f0f0;
-  border-top: 3px solid #e0e0e0;
-  border-bottom: 1px solid #c8ced3;
-
-  label {
-    white-space: nowrap;
-  }
-
-  .form-group {
-    & > label {
-      margin-bottom: 0.25rem;
-      padding-bottom: 0.1rem;
-      display: block;
-      border-bottom: 1px solid #c8ced3;
-      color: #1b8eb7;
-    }
-
-    & > ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      li {
-        margin-right: 1rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-      }
-    }
-  }
-}
-
 .fade.modal.show {
   background-color: #F7F7F7;
   color: #73879C;
   font-weight: 600;
   box-shadow: 5px 10px;
+  background-image: $bg;
+  background-size: cover;
+  .modal-content {
+    opacity: 0.9;
+  }
 }
 
-.modal-content {
-  background-color: #F7F7F7;
-  border: none;
-  text-align: center;
+.sk-cube-grid .sk-cube {
+  background-color: #D35400
 }
 
-.main .container-fluid {
-  padding: 30px 30px 0px 30px;
+.modal-dialog.loading.modal-dialog-centered {
+  .modal-content {
+    background: none;
+    border: none;
+  }
+}
+
+.app-header.navbar {
+  z-index: 2308;
 }
