@@ -13,4 +13,5 @@ export default {
   http: null,
   initializeDone: false,
   isVerified: false,
+  locale: 'en'
 };

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { DropdownMenu, DropdownToggle, Nav, DropdownItem, UncontrolledDropdown } from 'reactstrap';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-
+import { onChangeLanguage } from '../../lib/redux/actions'
+import { DropdownMenu, DropdownToggle, Nav, DropdownItem, UncontrolledDropdown } from 'reactstrap';
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg';
 import sygnet from '../../assets/img/brand/sygnet.svg';
@@ -9,6 +11,16 @@ import avatar from '../../assets/img/avatars/4.jpg';
 
 
 class AdminHeader extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleLanguage = this.handleLanguage.bind(this);
+  }
+
+  handleLanguage = (locale) => {
+    this.props.onChangeLanguage(locale);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -19,6 +31,28 @@ class AdminHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
         <Nav className="ml-auto" navbar>
+          <UncontrolledDropdown>
+            <DropdownToggle id="dropdown-basic">
+              <FormattedMessage id={this.props.locale} />
+            </DropdownToggle>
+
+            <DropdownMenu>
+              <DropdownItem
+                onClick={() => this.handleLanguage('vi')}
+                key="vi"
+                active={this.props.locale === 'vi' && true}
+              >
+                <FormattedMessage id="Vietnameses" />
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => this.handleLanguage('en')}
+                key="en"
+                active={this.props.locale === 'en' && true}
+              >
+                <FormattedMessage id="English" />
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
           <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
               <img
@@ -39,7 +73,9 @@ class AdminHeader extends Component {
                 transform: 'translate3d(-132px, 35px, 0px)'
               }}
             >
-              <DropdownItem tag={Link} to="/logout"><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem tag={Link} to="/logout"><i className="fa fa-lock"></i>
+                <FormattedMessage id="Logout" />
+              </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
@@ -50,4 +86,18 @@ class AdminHeader extends Component {
   }
 }
 
-export default AdminHeader
+const mapStateToProps = (storeState, ownProps) => {
+  let newProps = Object.assign({}, ownProps);
+
+  newProps.locale = storeState.locale;
+
+  return newProps;
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeLanguage: (locale) => dispatch(onChangeLanguage(locale))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminHeader)
