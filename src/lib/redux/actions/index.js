@@ -8,3 +8,4 @@ export const isRequesting = createAction('IS_REQUESTING');
 export const raiseError = createAction('RAISE_ERROR');
 export const logout = createAction('LOGOUT');
 export const initializeDone = createAction('INITIALIZE_DONE');
+export const onChangeLanguage = createAction('ON_CHANGE_LANGUAGE');

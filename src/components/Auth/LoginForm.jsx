@@ -13,7 +13,7 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { FiMail, FiLock } from 'react-icons/fi';
-// import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { updateMe, updateIdentity, isRequesting, raiseError, setTokenOnHttpClient } from '../../lib/redux/actions';
 import 'react-toastify/dist/ReactToastify.css';
@@ -51,10 +51,10 @@ class LoginFormComponent extends Component {
   render() {
     return (
       <Modal centered isOpen={this.props.visible}>
-        <ModalHeader>Login</ModalHeader>
+        <ModalHeader><FormattedMessage id="Login"/></ModalHeader>
         <ModalBody>
           <Alert isOpen={this.props.isError} color="danger">
-            {/* <FormattedMessage id={this.props.errorDescription}/> */}
+            <FormattedMessage id={this.props.errorDescription}/>
           </Alert>
           <InputGroup>
             <InputGroupAddon addonType="prepend"><span className="input-group-text"><FiMail/></span></InputGroupAddon>
@@ -62,7 +62,7 @@ class LoginFormComponent extends Component {
               type="email"
               name="email"
               value={this.state.email}
-              placeholder='E-mail address'
+              placeholder={this.props.intl.formatMessage({id: 'E-mail address'})}
               onChange={e => this.setState({email: e.currentTarget.value})}
             />
           </InputGroup>
@@ -73,7 +73,7 @@ class LoginFormComponent extends Component {
               type="password"
               name="password"
               value={this.state.password}
-              placeholder='Password'
+              placeholder={this.props.intl.formatMessage({id: 'Password'})}
               onChange={e => this.setState({password: e.currentTarget.value})}
             />
           </InputGroup>
@@ -92,7 +92,7 @@ class LoginFormComponent extends Component {
             onMouseLeave={e => {
               this.setState({isOpenPasswordResetPopover: false});
             }}
-          >Forgot password</Button>{' '}
+          ><FormattedMessage id="Forgot password"/></Button>{' '}
           <Button
             id="login-button"
             color="primary"
@@ -106,20 +106,20 @@ class LoginFormComponent extends Component {
             onMouseLeave={e => {
               this.setState({isOpenLoginPopover: false});
             }}
-          >Login</Button>
+          ><FormattedMessage id="Login"/></Button>
           <Popover
             placement="bottom"
             isOpen={this.state.isOpenLoginPopover}
             target="login-button"
           >
-            <PopoverBody>Please enter email address and password.</PopoverBody>
+            <PopoverBody><FormattedMessage id="Please enter email address and password."/></PopoverBody>
           </Popover>
           <Popover
             placement="bottom"
             isOpen={this.state.isOpenPasswordResetPopover}
             target="password-reset-button"
           >
-            <PopoverBody>Please enter email address.</PopoverBody>
+            <PopoverBody><FormattedMessage id="Please enter email address."/></PopoverBody>
           </Popover>
         </ModalFooter>
       </Modal>
@@ -173,6 +173,6 @@ const mapDispatchToProps = dispatch => {
 const LoginForm = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginFormComponent);
+)(injectIntl(LoginFormComponent));
 
 export default LoginForm;

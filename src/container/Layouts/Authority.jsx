@@ -189,7 +189,6 @@ class AuthorityContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.props.me === null) {
       return (
         <Suspense fallback={this.loading()}>
