@@ -13,5 +13,11 @@ export default {
   http: null,
   initializeDone: false,
   isVerified: false,
-  locale: 'en'
+  locale: 'en',
+
+  configOfTodo: {
+    pageSize: 100,
+    sorted: [{id: 'title', desc: true}],
+    columns: {},
+  },
 };

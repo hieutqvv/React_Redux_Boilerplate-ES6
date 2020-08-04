@@ -5,6 +5,11 @@ const navigation = () => {
         name: 'Dashboard',
         url: '/dashboard',
         icon: 'icon-speedometer',
+      },
+      {
+        name: 'Todo',
+        url: '/todo',
+        icon: 'icon-speedometer',
       }
     ]
   };
