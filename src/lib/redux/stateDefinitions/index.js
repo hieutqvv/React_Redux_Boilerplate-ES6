@@ -14,6 +14,7 @@ export default {
   initializeDone: false,
   isVerified: false,
   locale: 'en',
+  doesRequireReload: false,
 
   configOfTodo: {
     pageSize: 100,

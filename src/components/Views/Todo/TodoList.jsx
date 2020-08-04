@@ -3,30 +3,20 @@ import {connect} from 'react-redux';
 import {injectIntl} from 'react-intl';
 import OperableCard from '../../Parts/Card/OperableCard'
 import MoldableTable from '../../Parts/Table/MoldableTable';
+import LoadableTable from '../../Parts/Table/LoadableTable'
 import todoListColumns from '../../../lib/table/columnTemplates/todoList';
 
 export class TodoListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayable: true,
+      displayable: false,
     };
     this.title = 'Todo List';
     this.endpoint = '/todos';
     this.pageName = 'Todo';
     this.table = React.createRef();
-    this.data = [
-      {
-        title: 'Hieu'
-      },
-      {
-        title: 'lalalala'
-      },
-      {
-        title: 'balalal'
-      }
-    ];
-
+    this.columns = todoListColumns;
   }
   render() {
     return (
@@ -36,11 +26,14 @@ export class TodoListComponent extends Component {
         displayable={this.state.displayable}
         configurable={true}
       >
-        <MoldableTable
-          columns={todoListColumns}
-          data={this.data}
-          showPagination={false}
-          onFetchData={this.onFetchData}
+        <LoadableTable
+          pageName={this.pageName}
+          endpoint={this.endpoint}
+          query={{}}
+          columns={this.columns}
+          onLoaded={() => this.setState({displayable: true})}
+          table={this.table}
+          config={this.props.config}
         />
       </OperableCard>
     )
