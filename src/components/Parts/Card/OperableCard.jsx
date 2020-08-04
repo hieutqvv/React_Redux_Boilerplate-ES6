@@ -67,6 +67,10 @@ class OperableCardComponent extends Component {
 
             </div>
           </CardHeader>
+          {this.props.configurable && <OperationPanel
+            toggleDisplay={this.state.isDisplayOperationPanel}
+            {...this.props}
+          />}
           <CardBody>{this.props.children}</CardBody>
         </Card>
       </div>

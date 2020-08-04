@@ -22,9 +22,12 @@ export class TodoListComponent extends Component {
     return (
       <OperableCard
         title={this.title}
+        onReload={this.table.current && this.table.current.fireFetchData}
         pageName={this.pageName}
         displayable={this.state.displayable}
         configurable={true}
+        config={this.props.config}
+        columns={this.columns}
       >
         <LoadableTable
           pageName={this.pageName}

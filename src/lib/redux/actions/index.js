@@ -10,3 +10,4 @@ export const logout = createAction('LOGOUT');
 export const initializeDone = createAction('INITIALIZE_DONE');
 export const onChangeLanguage = createAction('ON_CHANGE_LANGUAGE');
 export const doesRequireReload = createAction('DOES_REQUIRE_RELOAD');
+export const updatePageConfig = createAction('UPDATE_PAGE_CONFIG');
