@@ -8,6 +8,7 @@ import RAISE_ERROR from './raiseError';
 import LOGOUT from './logout';
 import IS_REQUESTING from './isRequesting';
 import ON_CHANGE_LANGUAGE from './onChangeLanguage';
+import DOES_REQUIRE_RELOAD from './doesRequireReload';
 
 const reducers = {
   SET_HTTP_CLIENT,
@@ -18,7 +19,8 @@ const reducers = {
   INITIALIZE_DONE,
   UPDATE_ME,
   UPDATE_IDENTITY,
-  ON_CHANGE_LANGUAGE
+  ON_CHANGE_LANGUAGE,
+  DOES_REQUIRE_RELOAD
 };
 
 export default (state = defaultState, action = {}) => {

@@ -11,6 +11,7 @@ import {
   AppSidebarHeader,
   AppSidebarMinimizer,
   AppSidebarNav,
+  AppBreadcrumb
 } from '@coreui/react';
 
 // routes config
@@ -56,6 +57,7 @@ class AdminLayoutContainer extends Component {
               <AppSidebarMinimizer/>
             </AppSidebar>
             <main className="main">
+              <AppBreadcrumb appRoutes={routes}/>
               <Container fluid>
                 <Suspense fallback={this.loading()}>
                   <Switch>
